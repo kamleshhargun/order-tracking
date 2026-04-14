@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<style>
+body { font-family: Arial; background:#eee; padding:30px; }
+.card { padding:20px; margin:10px; background:white; border-radius:10px; }
+</style>
+</head>
+
+<body>
+
+<h2>📊 Dashboard</h2>
+
+<div class="card">Total: <span id="total"></span></div>
+<div class="card">Delivered: <span id="delivered"></span></div>
+<div class="card">Pending: <span id="pending"></span></div>
+<div class="card">COD ₹: <span id="cod"></span></div>
+
+<script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbwtfmzmGASPrGsUU-Z1O2SyiXr_oxROzhKmX7OjQ02yaCUnhzS9xA9RwHJOG9JSCHNoLw/exec";
+
+async function load() {
+  const res = await fetch(`${API_URL}?dashboard=1`);
+  const d = await res.json();
+
+  document.getElementById("total").innerText = d.total;
+  document.getElementById("delivered").innerText = d.delivered;
+  document.getElementById("pending").innerText = d.pending;
+  document.getElementById("cod").innerText = d.codTotal;
+}
+
+load();
+
+</script>
+
+</body>
+</html>
